@@ -1,7 +1,6 @@
 local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
 local Window = OrionLib:MakeWindow({Name = "MM2 Master Script", HidePremium = false, SaveConfig = true, IntroText = "MM2 Script + ESP"})
 
--- 1. БАСТЫ МӘЗІР (Infinite Jump, Invisible)
 local MainTab = Window:MakeTab({Name = "Басты", Icon = "rbxassetid://4483345998", PremiumOnly = false})
 
 MainTab:AddToggle({
@@ -31,14 +30,12 @@ MainTab:AddButton({
     end
 })
 
--- 2. ESP МӘЗІРІ (Қабырға арқылы көру)
 local ESPTab = Window:MakeTab({Name = "ESP", Icon = "rbxassetid://4483345998", PremiumOnly = false})
 
 ESPTab:AddButton({
     Name = "ESP Қосу (Murderer/Sheriff/Innocent)",
     Callback = function()
         local Players = game:GetService("Players")
-        
         local function ApplyESP(plr)
             if plr ~= Players.LocalPlayer and plr.Character and not plr.Character:FindFirstChild("Highlight") then
                 local Highlight = Instance.new("Highlight")
@@ -47,7 +44,6 @@ ESPTab:AddButton({
                 Highlight.FillTransparency = 0.5
                 Highlight.OutlineTransparency = 0
                 
-                -- Рөлдерді түспен белгілеу (Қанішер - Қызыл, Шериф - Көк, Басқалары - Жасыл)
                 if plr.Backpack:FindFirstChild("Knife") or plr.Character:FindFirstChild("Knife") then
                     Highlight.FillColor = Color3.fromRGB(255, 0, 0)
                 elseif plr.Backpack:FindFirstChild("Gun") or plr.Character:FindFirstChild("Gun") then
@@ -65,21 +61,13 @@ ESPTab:AddButton({
                 ApplyESP(plr)
             end)
         end
-        
-        Players.PlayerAdded:Connect(function(plr)
-            plr.CharacterAdded:Connect(function()
-                task.wait(0.5)
-                ApplyESP(plr)
-            end)
-        end)
     end
 })
 
--- 3. COMBAT МӘЗІРІ (Aimbot & Shot Murderer)
 local CombatTab = Window:MakeTab({Name = "Combat", Icon = "rbxassetid://4483345998", PremiumOnly = false})
 
 CombatTab:AddButton({
-    Name = "Aimbot (Пышақ/Тапанша көздеу)",
+    Name = "Aimbot",
     Callback = function()
         local Camera = workspace.CurrentCamera
         local Players = game:GetService("Players")
@@ -114,7 +102,7 @@ CombatTab:AddButton({
 })
 
 CombatTab:AddButton({
-    Name = "Shot Murderer (Қанішерді ату)",
+    Name = "Shot Murderer",
     Callback = function()
         local Players = game:GetService("Players")
         for _, v in pairs(Players:GetPlayers()) do
@@ -128,7 +116,6 @@ CombatTab:AddButton({
     end
 })
 
--- 4. TELEPORT МӘЗІРІ (Lobby / Map)
 local TeleportTab = Window:MakeTab({Name = "Teleport", Icon = "rbxassetid://4483345998", PremiumOnly = false})
 
 TeleportTab:AddButton({
@@ -157,3 +144,4 @@ TeleportTab:AddButton({
 })
 
 OrionLib:Init()
+
